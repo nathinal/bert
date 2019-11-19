@@ -134,7 +134,7 @@ class BertModel(object):
                  input_ids,
                  input_mask=None,
                  token_type_ids=None,
-                 use_one_hot_embeddings=False,
+                 use_one_hot_embeddings=True,
                  scope=None):
         """Constructor for BertModel.
 
@@ -261,7 +261,8 @@ class BertModel(object):
         return self.embedding_table
 
 
-def gelu(x):
+# def gelu(x):
+def gelu(input_tensor):
     """Gaussian Error Linear Unit.
 
     This is a smoother version of the RELU.
@@ -272,9 +273,11 @@ def gelu(x):
     Returns:
       `x` with the GELU activation applied.
     """
-    cdf = 0.5 * (1.0 + tf.tanh(
-        (np.sqrt(2 / np.pi) * (x + 0.044715 * tf.pow(x, 3)))))
-    return x * cdf
+    # cdf = 0.5 * (1.0 + tf.tanh(
+    #     (np.sqrt(2 / np.pi) * (x + 0.044715 * tf.pow(x, 3)))))
+    # return x * cdf
+    cdf = 0.5 * (1.0 + tf.erf(input_tensor / tf.sqrt(2.0)))
+    return input_tensor * cdf
 
 
 def get_activation(activation_string):
@@ -411,12 +414,14 @@ def embedding_lookup(input_ids,
         shape=[vocab_size, embedding_size],
         initializer=create_initializer(initializer_range))
 
-    flat_input_ids = tf.reshape(input_ids, [-1])
+    # flat_input_ids = tf.reshape(input_ids, [-1])
     if use_one_hot_embeddings:
+        flat_input_ids = tf.reshape(input_ids, [-1])
         one_hot_input_ids = tf.one_hot(flat_input_ids, depth=vocab_size)
         output = tf.matmul(one_hot_input_ids, embedding_table)
     else:
-        output = tf.gather(embedding_table, flat_input_ids)
+        # output = tf.gather(embedding_table, flat_input_ids)
+        output = tf.nn.embedding_lookup(embedding_table, input_ids)
 
     input_shape = get_shape_list(input_ids)
 

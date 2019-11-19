@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01971e44-fbe9-413e-a99b-9a2b854490df" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" afterPath="$PROJECT_DIR$/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/create_pretraining_data.py" afterPath="$PROJECT_DIR$/create_pretraining_data.py" />
-      <change beforePath="$PROJECT_DIR$/extract_features.py" afterPath="$PROJECT_DIR$/extract_features.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/modeling.py" afterPath="$PROJECT_DIR$/modeling.py" />
-      <change beforePath="$PROJECT_DIR$/modeling_test.py" afterPath="$PROJECT_DIR$/modeling_test.py" />
       <change beforePath="$PROJECT_DIR$/optimization.py" afterPath="$PROJECT_DIR$/optimization.py" />
-      <change beforePath="$PROJECT_DIR$/optimization_test.py" afterPath="$PROJECT_DIR$/optimization_test.py" />
-      <change beforePath="$PROJECT_DIR$/predicting_movie_reviews_with_bert_on_tf_hub.ipynb" afterPath="$PROJECT_DIR$/predicting_movie_reviews_with_bert_on_tf_hub.ipynb" />
       <change beforePath="$PROJECT_DIR$/run_classifier.py" afterPath="$PROJECT_DIR$/run_classifier.py" />
-      <change beforePath="$PROJECT_DIR$/run_classifier_with_tfhub.py" afterPath="$PROJECT_DIR$/run_classifier_with_tfhub.py" />
       <change beforePath="$PROJECT_DIR$/run_pretraining.py" afterPath="$PROJECT_DIR$/run_pretraining.py" />
       <change beforePath="$PROJECT_DIR$/run_squad.py" afterPath="$PROJECT_DIR$/run_squad.py" />
       <change beforePath="$PROJECT_DIR$/tokenization.py" afterPath="$PROJECT_DIR$/tokenization.py" />
@@ -28,74 +20,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="modeling_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modeling_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="multilingual.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/multilingual.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="optimization_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/optimization_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="predicting_movie_reviews_with_bert_on_tf_hub.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predicting_movie_reviews_with_bert_on_tf_hub.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run_classifier.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_classifier.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run_pretraining.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_pretraining.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="run_squad.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_squad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="628">
+              <caret line="1255" column="44" lean-forward="true" selection-start-line="1255" selection-start-column="44" selection-end-line="1255" selection-end-column="44" />
+              <folding>
+                <element signature="e#659#697#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,8 +35,8 @@
       <file leaf-file-name="tokenization.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tokenization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="32" column="67" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
+            <state relative-caret-position="427">
+              <caret line="381" column="27" lean-forward="false" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -113,18 +45,42 @@
       <file leaf-file-name="tokenization_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tokenization_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="498">
+              <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="run_classifier_with_tfhub.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_classifier_with_tfhub.py">
+      <file leaf-file-name="run_classifier.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_classifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="31" column="20" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+            <state relative-caret-position="493">
+              <caret line="643" column="8" lean-forward="false" selection-start-line="643" selection-start-column="8" selection-end-line="643" selection-end-column="8" />
+              <folding>
+                <element signature="e#646#684#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="optimization.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/optimization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="631">
+              <caret line="186" column="8" lean-forward="false" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
+              <folding>
+                <element signature="e#686#724#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modeling.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modeling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-17609">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,20 +88,25 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>gelu</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/optimization.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/create_pretraining_data.py" />
         <option value="$PROJECT_DIR$/extract_features.py" />
-        <option value="$PROJECT_DIR$/modeling.py" />
         <option value="$PROJECT_DIR$/modeling_test.py" />
         <option value="$PROJECT_DIR$/optimization_test.py" />
         <option value="$PROJECT_DIR$/run_classifier_with_tfhub.py" />
+        <option value="$PROJECT_DIR$/modeling.py" />
+        <option value="$PROJECT_DIR$/optimization.py" />
         <option value="$PROJECT_DIR$/run_classifier.py" />
         <option value="$PROJECT_DIR$/run_pretraining.py" />
         <option value="$PROJECT_DIR$/run_squad.py" />
@@ -308,14 +269,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/optimization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CONTRIBUTING.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -355,14 +308,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modeling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -409,42 +354,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_classifier.py">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_pretraining.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state relative-caret-position="776">
+          <caret line="520" column="36" lean-forward="false" selection-start-line="520" selection-start-column="36" selection-end-line="520" selection-end-column="36" />
+          <folding>
+            <element signature="e#683#721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/optimization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="186" column="8" lean-forward="false" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
+          <folding>
+            <element signature="e#686#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modeling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17609">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_classifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="643" column="8" lean-forward="false" selection-start-line="643" selection-start-column="8" selection-end-line="643" selection-end-column="8" />
+          <folding>
+            <element signature="e#646#684#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_squad.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="628">
+          <caret line="1255" column="44" lean-forward="true" selection-start-line="1255" selection-start-column="44" selection-end-line="1255" selection-end-column="44" />
+          <folding>
+            <element signature="e#659#697#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tokenization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="32" column="67" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
+        <state relative-caret-position="427">
+          <caret line="381" column="27" lean-forward="false" selection-start-line="381" selection-start-column="27" selection-end-line="381" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tokenization_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="498">
+          <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding />
         </state>
       </provider>

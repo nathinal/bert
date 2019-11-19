@@ -20,9 +20,12 @@ from __future__ import print_function
 
 import re
 import tensorflow as tf
+import horovod.tensorflow as hvd
 
 
-def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu):
+# def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu):
+def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu,
+                     use_multi_gpu):
     """Creates an optimizer training op."""
     global_step = tf.train.get_or_create_global_step()
 
@@ -52,6 +55,8 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu):
         is_warmup = tf.cast(global_steps_int < warmup_steps_int, tf.float32)
         learning_rate = (
                 (1.0 - is_warmup) * learning_rate + is_warmup * warmup_learning_rate)
+        if use_multi_gpu:
+            learning_rate = learning_rate * hvd.size()
 
     # It is recommended that you use this optimizer for fine tuning, since this
     # is how the model was trained (note that the Adam m/v variables are NOT
@@ -64,17 +69,30 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, use_tpu):
         epsilon=1e-6,
         exclude_from_weight_decay=["LayerNorm", "layer_norm", "bias"])
 
+    if use_multi_gpu:
+        optimizer = hvd.DistributedOptimizer(optimizer,
+                                             compression=hvd.Compression.fp16,
+                                             sparse_as_dense=True)
+
     if use_tpu:
         optimizer = tf.contrib.tpu.CrossShardOptimizer(optimizer)
 
     tvars = tf.trainable_variables()
-    grads = tf.gradients(loss, tvars)
+    # grads = tf.gradients(loss, tvars)
+    if use_multi_gpu:
+        grads_and_vars = optimizer.compute_gradients(loss, tvars)
+        grads = [grad for grad, var in grads_and_vars]
+        tvars = [var for grad, var in grads_and_vars]
+    else:
+        grads = tf.gradients(loss, tvars)
 
     # This is how the model was pre-trained.
     (grads, _) = tf.clip_by_global_norm(grads, clip_norm=1.0)
 
-    train_op = optimizer.apply_gradients(
-        zip(grads, tvars), global_step=global_step)
+    # train_op = optimizer.apply_gradients(
+    #     zip(grads, tvars), global_step=global_step)
+
+    train_op = optimizer.apply_gradients(zip(grads, tvars), global_step=global_step)
 
     # Normally the global step update is done inside of `apply_gradients`.
     # However, `AdamWeightDecayOptimizer` doesn't do this. But if you use

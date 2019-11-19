@@ -28,6 +28,7 @@ import optimization
 import tokenization
 import six
 import tensorflow as tf
+import horovod.tensorflow as hvd
 
 flags = tf.flags
 
@@ -115,6 +116,9 @@ flags.DEFINE_integer(
     "because the start and end predictions are not conditioned on one another.")
 
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
+
+flags.DEFINE_bool("use_multi_gpu", False, "Use multiple GPUs for training "
+                                          "using Horovod.")
 
 tf.flags.DEFINE_string(
     "tpu_name", None,
@@ -589,7 +593,8 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
 
 def model_fn_builder(bert_config, init_checkpoint, learning_rate,
                      num_train_steps, num_warmup_steps, use_tpu,
-                     use_one_hot_embeddings):
+                     use_one_hot_embeddings, use_multi_gpu):
+    # use_one_hot_embeddings):
     """Returns `model_fn` closure for TPUEstimator."""
 
     def model_fn(features, labels, mode, params):  # pylint: disable=unused-argument
@@ -659,8 +664,11 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
 
             total_loss = (start_loss + end_loss) / 2.0
 
+            # train_op = optimization.create_optimizer(
+            #     total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu)
             train_op = optimization.create_optimizer(
-                total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu)
+                total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu,
+                use_multi_gpu)
 
             output_spec = tf.contrib.tpu.TPUEstimatorSpec(
                 mode=mode,
@@ -1124,6 +1132,9 @@ def validate_flags_or_throw(bert_config):
 
 
 def main(_):
+    if FLAGS.use_multi_gpu:
+        hvd.init()
+        FLAGS.output_dir = FLAGS.output_dir if hvd.rank() == 0 else os.path.join(FLAGS.output_dir, str(hvd.rank()))
     tf.logging.set_verbosity(tf.logging.INFO)
 
     bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
@@ -1141,15 +1152,42 @@ def main(_):
             FLAGS.tpu_name, zone=FLAGS.tpu_zone, project=FLAGS.gcp_project)
 
     is_per_host = tf.contrib.tpu.InputPipelineConfig.PER_HOST_V2
-    run_config = tf.contrib.tpu.RunConfig(
-        cluster=tpu_cluster_resolver,
-        master=FLAGS.master,
-        model_dir=FLAGS.output_dir,
-        save_checkpoints_steps=FLAGS.save_checkpoints_steps,
-        tpu_config=tf.contrib.tpu.TPUConfig(
-            iterations_per_loop=FLAGS.iterations_per_loop,
-            num_shards=FLAGS.num_tpu_cores,
-            per_host_input_for_training=is_per_host))
+
+    if FLAGS.use_multi_gpu:
+        # Horovod: pin GPU to be used to process local rank (one GPU per process)
+        config = tf.ConfigProto()
+        config.gpu_options.visible_device_list = str(hvd.local_rank())
+        run_config = tf.contrib.tpu.RunConfig(
+            cluster=tpu_cluster_resolver,
+            master=FLAGS.master,
+            model_dir=FLAGS.output_dir,
+            save_checkpoints_steps=FLAGS.save_checkpoints_steps,
+            tpu_config=tf.contrib.tpu.TPUConfig(
+                iterations_per_loop=FLAGS.iterations_per_loop,
+                num_shards=FLAGS.num_tpu_cores,
+                per_host_input_for_training=is_per_host),
+            log_step_count_steps=25,
+            session_config=config)
+    else:
+        run_config = tf.contrib.tpu.RunConfig(
+            cluster=tpu_cluster_resolver,
+            master=FLAGS.master,
+            model_dir=FLAGS.output_dir,
+            save_checkpoints_steps=FLAGS.save_checkpoints_steps,
+            tpu_config=tf.contrib.tpu.TPUConfig(
+                iterations_per_loop=FLAGS.iterations_per_loop,
+                num_shards=FLAGS.num_tpu_cores,
+                per_host_input_for_training=is_per_host))
+
+    # run_config = tf.contrib.tpu.RunConfig(
+    #     cluster=tpu_cluster_resolver,
+    #     master=FLAGS.master,
+    #     model_dir=FLAGS.output_dir,
+    #     save_checkpoints_steps=FLAGS.save_checkpoints_steps,
+    #     tpu_config=tf.contrib.tpu.TPUConfig(
+    #         iterations_per_loop=FLAGS.iterations_per_loop,
+    #         num_shards=FLAGS.num_tpu_cores,
+    #         per_host_input_for_training=is_per_host))
 
     train_examples = None
     num_train_steps = None
@@ -1166,6 +1204,10 @@ def main(_):
         rng = random.Random(12345)
         rng.shuffle(train_examples)
 
+    if FLAGS.use_multi_gpu:
+        num_train_steps = num_train_steps // hvd.size()
+        num_warmup_steps = num_warmup_steps // hvd.size()
+
     model_fn = model_fn_builder(
         bert_config=bert_config,
         init_checkpoint=FLAGS.init_checkpoint,
@@ -1173,7 +1215,9 @@ def main(_):
         num_train_steps=num_train_steps,
         num_warmup_steps=num_warmup_steps,
         use_tpu=FLAGS.use_tpu,
-        use_one_hot_embeddings=FLAGS.use_tpu)
+        use_one_hot_embeddings=FLAGS.use_tpu,
+        use_multi_gpu=FLAGS.use_multi_gpu)
+    # use_one_hot_embeddings=FLAGS.use_tpu)
 
     # If TPU is not available, this will fall back to normal Estimator on CPU
     # or GPU.
@@ -1212,7 +1256,14 @@ def main(_):
             seq_length=FLAGS.max_seq_length,
             is_training=True,
             drop_remainder=True)
-        estimator.train(input_fn=train_input_fn, max_steps=num_train_steps)
+        # estimator.train(input_fn=train_input_fn, max_steps=num_train_steps)
+
+        if FLAGS.use_multi_gpu:
+            hooks = [hvd.BroadcastGlobalVariablesHook(0)]
+        else:
+            hooks = []
+        estimator.train(input_fn=train_input_fn, max_steps=num_train_steps,
+                        hooks=hooks)
 
     if FLAGS.do_predict:
         eval_examples = read_squad_examples(
